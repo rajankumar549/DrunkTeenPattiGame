@@ -102,7 +102,7 @@ func (d *CardDeck) Shuffle() {
 }
 
 func (d *CardDeck) FetchCards(howMany int64) ([]card.Card, error) {
-	if d.NoOfCardLeft < howMany {
+	if d.NoOfCardLeft > howMany {
 		return nil, fmt.Errorf("unable to fetch %d card cause %d card in deck", howMany, d.NoOfCardLeft)
 	}
 	c := d.Cards[0:howMany]
