@@ -12,14 +12,13 @@ import (
 
 func New() deck.Deck {
 	allCards := []card.Card{}
-	for _, f := range []card.CardFamily{card.Clover, card.Heart, card.Spades, card.Tiels} {
+	for _, f := range card.AllAvailableCardFamily {
 		for _, c := range card.AllAvailableCard {
 			c.Family = f
 			allCards = append(allCards, c)
 		}
-
 	}
-	//fmt.Printf("All Avaliable Card are %+v", c)
+
 	return &Repo{
 		NoOfCardLeft: int64(len(allCards)),
 		Cards:        allCards,
@@ -42,7 +41,7 @@ func (d *Repo) FetchCards(howMany int64) ([]card.Card, error) {
 }
 
 func (d *Repo) ShowOrder() {
-	fmt.Print("\n-------------- Deck -----------\n")
+
 	for _, c := range d.Cards {
 		fmt.Printf("[%s %s]", c.Label, c.Family)
 	}

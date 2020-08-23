@@ -5,8 +5,8 @@ import (
 
 	"github.com/rajankumar549/DrunkTeenPattiGame/src/entity/deck"
 	"github.com/rajankumar549/DrunkTeenPattiGame/src/entity/player"
-	deckRepo "github.com/rajankumar549/DrunkTeenPattiGame/src/usecases/deck"
-	player2 "github.com/rajankumar549/DrunkTeenPattiGame/src/usecases/player"
+	deckRepo "github.com/rajankumar549/DrunkTeenPattiGame/src/implementation/deck"
+	player2 "github.com/rajankumar549/DrunkTeenPattiGame/src/implementation/player"
 	"github.com/rajankumar549/DrunkTeenPattiGame/src/util"
 )
 
@@ -17,19 +17,10 @@ type Game struct {
 	Players []player.Player
 }
 
-var gameResult = struct {
-	Win  int64
-	Lose int64
-	Tie  int64
-}{
-	Win:  1,
-	Lose: -1,
-	Tie:  0,
-}
-
 func (gm *Game) Start(gameNo int64) {
 	n := gm.getNoOfPlayers()
 	gm.AddNPlayerToGame(gameNo, n)
+
 	gm.Deck.Shuffle()
 	gm.Deck.Shuffle()
 
@@ -50,17 +41,17 @@ func (gm *Game) Start(gameNo int64) {
 	for i := int64(1); i < n; i++ {
 
 		result := winner.IsWinner(gm.Players[i], gm.Deck)
-		if result == gameResult.Win {
+		if result == player.FaceOfResult.Win {
 			continue
 		}
 
-		if result == gameResult.Lose {
+		if result == player.FaceOfResult.Lose {
 			winner = gm.Players[i]
 			continue
 		}
 
 		tieResult := winner.IsTieWinner(gm.Players[i], gm.Deck)
-		if tieResult == gameResult.Lose {
+		if tieResult == player.FaceOfResult.Lose {
 			winner = gm.Players[i]
 		}
 	}

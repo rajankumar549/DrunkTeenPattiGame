@@ -2,9 +2,8 @@ package player
 
 import (
 	"github.com/golang/mock/gomock"
-
-	"github.com/rajankumar549/DrunkTeenPattiGame/src/constants"
 	"github.com/rajankumar549/DrunkTeenPattiGame/src/entity/card"
+	"github.com/rajankumar549/DrunkTeenPattiGame/src/entity/player"
 	mock "github.com/rajankumar549/DrunkTeenPattiGame/src/mock/deck"
 	"testing"
 )
@@ -31,7 +30,7 @@ func TestRepo_IsWinner(t *testing.T) {
 			card.CARD_2,
 		},
 	}
-	want := constants.PlayerFaceOffResult.Win
+	want := player.FaceOfResult.Win
 
 	t.Run("P1 Winner", func(t *testing.T) {
 		deckMock.EXPECT().IsTrail(player1.cards).Return(true)
@@ -52,7 +51,7 @@ func TestRepo_IsWinner(t *testing.T) {
 		card.CARD_A,
 		card.CARD_2,
 	}
-	want = constants.PlayerFaceOffResult.Tie
+	want = player.FaceOfResult.Tie
 	t.Run("P1 Winner", func(t *testing.T) {
 		deckMock.EXPECT().IsTrail(player1.cards).Return(true)
 		deckMock.EXPECT().IsTrail(player2.cards).Return(true)
@@ -73,7 +72,7 @@ func TestRepo_IsWinner(t *testing.T) {
 		card.CARD_A,
 		card.CARD_2,
 	}
-	want = constants.PlayerFaceOffResult.Win
+	want = player.FaceOfResult.Win
 	t.Run("P1 Winner", func(t *testing.T) {
 		deckMock.EXPECT().IsTrail(player1.cards).Return(false)
 		deckMock.EXPECT().IsTrail(player2.cards).Return(false)
@@ -96,7 +95,7 @@ func TestRepo_IsWinner(t *testing.T) {
 		card.CARD_2,
 		card.CARD_3,
 	}
-	want = constants.PlayerFaceOffResult.Tie
+	want = player.FaceOfResult.Tie
 	t.Run("P1 Winner", func(t *testing.T) {
 		deckMock.EXPECT().IsTrail(player1.cards).Return(false)
 		deckMock.EXPECT().IsTrail(player2.cards).Return(false)
@@ -119,7 +118,7 @@ func TestRepo_IsWinner(t *testing.T) {
 		card.CARD_A,
 		card.CARD_2,
 	}
-	want = constants.PlayerFaceOffResult.Lose
+	want = player.FaceOfResult.Lose
 	t.Run("P1 Winner", func(t *testing.T) {
 		deckMock.EXPECT().IsTrail(player1.cards).Return(false)
 		deckMock.EXPECT().IsTrail(player2.cards).Return(false)
@@ -145,7 +144,7 @@ func TestRepo_IsWinner(t *testing.T) {
 		card.CARD_A,
 		card.CARD_J,
 	}
-	want = constants.PlayerFaceOffResult.Tie
+	want = player.FaceOfResult.Tie
 	t.Run("P1 Winner", func(t *testing.T) {
 		deckMock.EXPECT().IsTrail(player1.cards).Return(false)
 		deckMock.EXPECT().IsTrail(player2.cards).Return(false)
@@ -171,7 +170,7 @@ func TestRepo_IsWinner(t *testing.T) {
 		card.CARD_8,
 		card.CARD_7,
 	}
-	want = constants.PlayerFaceOffResult.Win
+	want = player.FaceOfResult.Win
 	t.Run("P1 Winner", func(t *testing.T) {
 		deckMock.EXPECT().IsTrail(player1.cards).Return(false)
 		deckMock.EXPECT().IsTrail(player2.cards).Return(false)
@@ -199,7 +198,7 @@ func TestRepo_IsWinner(t *testing.T) {
 		card.CARD_A,
 		card.CARD_7,
 	}
-	want = constants.PlayerFaceOffResult.Tie
+	want = player.FaceOfResult.Tie
 	t.Run("P1 Winner", func(t *testing.T) {
 		deckMock.EXPECT().IsTrail(player1.cards).Return(false)
 		deckMock.EXPECT().IsTrail(player2.cards).Return(false)
@@ -237,7 +236,7 @@ func TestRepo_IsTieWinner(t *testing.T) {
 			card.CARD_8,
 		},
 	}
-	want := constants.PlayerFaceOffResult.Win
+	want := player.FaceOfResult.Win
 
 	t.Run("P1 Winner", func(t *testing.T) {
 		deckMock.EXPECT().GetTopCard(player1.cards).Return(card.CARD_A)
@@ -259,7 +258,7 @@ func TestRepo_IsTieWinner(t *testing.T) {
 		card.CARD_3,
 		card.CARD_8,
 	}
-	want = constants.PlayerFaceOffResult.Lose
+	want = player.FaceOfResult.Lose
 
 	t.Run("P1 Winner", func(t *testing.T) {
 		deckMock.EXPECT().GetTopCard(player1.cards).Return(card.CARD_K)
@@ -281,7 +280,7 @@ func TestRepo_IsTieWinner(t *testing.T) {
 		card.CARD_3,
 		card.CARD_8,
 	}
-	want = constants.PlayerFaceOffResult.Win
+	want = player.FaceOfResult.Win
 	t.Run("P1 Winner", func(t *testing.T) {
 		deckMock.EXPECT().GetTopCard(player1.cards).Return(card.CARD_A)
 		deckMock.EXPECT().GetTopCard(player2.cards).Return(card.CARD_A)
@@ -304,7 +303,7 @@ func TestRepo_IsTieWinner(t *testing.T) {
 		card.CARD_3,
 		card.CARD_8,
 	}
-	want = constants.PlayerFaceOffResult.Lose
+	want = player.FaceOfResult.Lose
 	t.Run("P1 Winner", func(t *testing.T) {
 		deckMock.EXPECT().GetTopCard(player1.cards).Return(card.CARD_A)
 		deckMock.EXPECT().GetTopCard(player2.cards).Return(card.CARD_A)

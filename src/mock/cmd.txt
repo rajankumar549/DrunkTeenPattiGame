@@ -1,2 +1,4 @@
 
 mockgen -destination=./src/entity/mock/deck/mock.go -package=mock github.com/rajankumar549/DrunkTeenPattiGame/src/entity/deck Deck
+
+mockgen -destination=./src/mock/player/mock.go -package=mock github.com/rajankumar549/DrunkTeenPattiGame/src/entity/card Card

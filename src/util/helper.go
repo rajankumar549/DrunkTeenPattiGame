@@ -24,30 +24,34 @@ func SortCards(cards []card.Card, opt int) {
 func DeclareResult(winner player.Player, players []player.Player) {
 	fmt.Println("\n====================================================")
 	for _, p := range players {
-		cardStr := getcardStr(p.GetCards())
 		if p.GetName() == winner.GetName() {
-			fmt.Printf("\nName : %s  Cards : %s (Winner)", p.GetName(), cardStr)
+			fmt.Printf("\nName : %s (Winner) \n", p.GetName())
 		} else {
-			fmt.Printf("\nName : %s  Cards : %s", p.GetName(), cardStr)
+			fmt.Printf("\nName : %s\n", p.GetName())
 		}
-
+		printCards(p.GetCards())
+		fmt.Println("\n-------------------------------------------------")
 	}
 	fmt.Println("\n====================================================")
 }
 
-func ShowPlayersCard(player []player.Player) {
-	fmt.Println("\n====================Other Player Details================================\n")
-	for _, p := range player {
-		cardStr := getcardStr(p.GetCards())
-		fmt.Printf("\nName : %s  Cards : %s\n", p.GetName(), cardStr)
+func printCards(inpCards []card.Card) {
+	t1 := ".--------."
+	t2 := "| %s.--.  |"
+	t3 := "|  | %s | |"
+	t4 := "|  | %s | |"
+	t5 := "|  '--'%s |"
+	t6 := "`--------`"
+	cards := make([]string, 6)
+	for _, c := range inpCards {
+		cards[0] = cards[0] + "\t" + t1
+		cards[1] = cards[1] + "\t" + fmt.Sprintf(t2, c.Label)
+		cards[2] = cards[2] + "\t" + fmt.Sprintf(t3, c.Family)
+		cards[3] = cards[3] + "\t" + fmt.Sprintf(t4, c.Family)
+		cards[4] = cards[4] + "\t" + fmt.Sprintf(t5, c.Label)
+		cards[5] = cards[5] + "\t" + t6
 	}
-	fmt.Println("\n====================End================================\n")
-}
-
-func getcardStr(cards []card.Card) string {
-	cardDetails := ""
-	for _, c := range cards {
-		cardDetails = fmt.Sprintf("%s [%s %s]", cardDetails, c.Label, c.Family)
+	for _, s := range cards {
+		fmt.Println(s)
 	}
-	return cardDetails
 }
